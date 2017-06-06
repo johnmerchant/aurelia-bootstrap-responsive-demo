@@ -1,4 +1,3 @@
-import { Section } from './section';
 import { Router, RouterConfiguration, RouteConfig } from 'aurelia-router';
 
 export class App {
@@ -18,9 +17,9 @@ export class App {
   }
 
   configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = 'Fusion';
+    config.title = 'Fusion Frontend Demo App';
     config.map([
-      { route: ['', 'home'], name: 'home', moduleId: 'home' },
+      { route: ['', 'home'], name: 'home', moduleId: 'home', title: 'Home' },
       ...this.generateAllRoutes()
     ]);
     this.router = router;
@@ -32,7 +31,7 @@ export class App {
     let sections = [...top, ...primary];
     let pages: RouteConfig[] = [];
     for (let section of sections) {
-      pages.push(...this.generatePages(section.settings.section));
+      pages.push(...this.generatePages(section.name, section.title));
     }
     return [...sections, ...pages];
   }
@@ -47,7 +46,7 @@ export class App {
     return routes;
   }
 
-  private generatePages(section: string) {
+  private generatePages(section: string, sectionTitle: string) {
     const min = 3;
     const max = 8;
     let pages = Math.round(Math.random() * (max - min) + min);
@@ -56,8 +55,9 @@ export class App {
     for (let i = 0; i < pages; ++i) {
       let n = i + 1;
       let route = section + '/page' + n; // page1, page2, page3...
-      routes.push({ route, name: route, moduleId: 'page', nav: true, title: 'Page ' + n, settings: { section } })
+      routes.push({ route, name: route, moduleId: 'page', nav: true, title: 'Page ' + n, settings: { section, sectionTitle } })
     }
+    console.log(routes); 
     return routes;
   }
 

@@ -1,56 +1,75 @@
 <template>
   <require from="bootstrap/css/bootstrap.css"></require>
   <require from="./styles/site.css"></require>
-  <div class="container">
-    <div class="header clearfix">
-      <nav class="nav-top navbar navbar-light bg-faded">
-        <ul class="navbar-nav">
-          <li class="nav-item"
-              repeat.for="section of topSections">
-            <a class="nav-link ${section.active ? 'active' : ''}"
-               href.bind="section.href">${section.title}</a>
-          </li>
-        </ul>
-      </nav>
-      <nav class="nav-primary navbar navbar-toggleable-md navbar-inverse bg-primary">
-        <button aria-controls="navbarNavDropdown"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                class="navbar-toggler navbar-toggler-right"
-                data-target="#navbarNavDropdown"
-                data-toggle="collapse"
-                type="button">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-brand">Logo</div>
-        <div class="collapse navbar-collapse"
-             id="navbarNavDropdown">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown"
+  <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-top">
+      <ul class="nav navbar-nav navbar-left">
+        <li class="${section.active ? 'active' : ''}" repeat.for="section of topSections">
+          <a href.bind="section.href">${section.title}</a>
+        </il>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="tel:1800-123-456"><i class="fa fa-phone"></i> 1800 123 456</a>
+        </li>
+        <li  class="bg-primary">
+          <a href="#" class="sign-in-link"><i class="fa fa-sign-in"></i> Sign-in</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-default navbar-primary"
+         role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button aria-controls="navbar"
+                  aria-expanded="false"
+                  class="navbar-toggle collapsed"
+                  data-target="#navbar"
+                  data-toggle="collapse"
+                  type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="navbar-brand">Logo</div>
+        </div>
+          <form class="navbar-form navbar-right">
+        <div class="form-group">
+          <input type="search" class="form-control input-lg" placeholder="Search...">
+        </div>
+      </form>
+        <div class="navbar-collapse collapse"
+             id="navbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown ${section.active ? 'active' : ''}"
                 repeat.for="section of primarySections">
               <a aria-expanded="false"
                  aria-haspopup="true"
-                 class="nav-link dropdown-toggle ${section.active ? 'active' : ''}"
-                 href.bind="section.href"
-                 id.bind="section.config.name + 'DropdownLink'">${section.title}</a>
-              <div aria-labelledby.bind="section.config.name + 'DropdownLink'"
-                   class="dropdown-menu">
-                <a class="dropdown-item ${page.active ? 'active' : ''}"
-                   href.bind="page.href"
-                   repeat.for="page of sectionPages(section.config.name)">${page.title}</a>
-              </div>
+                 class="dropdown-toggle"
+                 data-toggle="dropdown"
+                 href="#"
+                 role="button">${section.title} 
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li repeat.for="page of sectionPages(section.config.name)">
+                  <a href.bind="page.href">${page.title}</a>
+                </li>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control"
-                   placeholder="Search..."
-                   type="search"></input>
-          </form>
         </div>
-      </nav>
-      <section class="router-view">
-        <router-view></router-view>
-      </section>
+      </div>
+    </nav>
+
+    <div class="container">
+      <ol class="breadcrumb" with.bind="router.currentInstruction">
+        <li if.bind="config.name !== 'home'"><a href="#/home">Home</a></li>
+        <li if.bind="config.settings.section">
+          <a href.bind="'#/' + config.settings.section">${config.settings.sectionTitle}</a>
+        </li>
+        <li class="active">${config.title}</li>
+      </ol>
+      <router-view></router-view>
     </div>
   </div>
 </template>

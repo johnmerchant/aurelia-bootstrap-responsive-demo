@@ -1,6 +1,7 @@
 {
     "name": "fusion-assignment",
     "type": "project:application",
+    "packageManager": "yarn",
     "platform": {
         "id": "web",
         "displayName": "Web",
@@ -82,7 +83,6 @@
                 "prepend": [
                     "node_modules/bluebird/js/browser/bluebird.core.js",
                     "node_modules/aurelia-cli/lib/resources/scripts/configure-bluebird.js",
-                    "node_modules/tether/dist/js/tether.min.js",
                     "node_modules/requirejs/require.js"
                 ],
                 "dependencies": [
@@ -125,7 +125,6 @@
                         "env": "dev"
                     },
                     "jquery",
-                    "tether",
                     {
                         "name": "bootstrap",
                         "path": "../node_modules/bootstrap/dist",

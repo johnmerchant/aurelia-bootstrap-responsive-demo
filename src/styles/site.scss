@@ -1,14 +1,33 @@
-nav.nav-top {
+nav.navbar-top {
     padding: 2px;
-    font-size: 12px;
+    font-size: 14px;
+    background-color: #FEFEFE;
 }
 
-nav.nav-primary {
-    padding: 48px;
-    font-size: 16px;
+nav.navbar-top .nav.navbar-nav>li>a {
+    padding-top: 2px !important;
+    padding-bottom: 0 !important;
+    height: 26px;
 }
 
-.navbar-brand {
-    font-size: 18pt;
-    padding: 2px 16px 2px 8px;
+.navbar {
+    min-height: 28px !important;
+}
+
+a.sign-in-link {
+    color: #FFFFFF !important;
+}
+
+nav.navbar-top .nav.navbar-nav ul li {
+    margin: 0px;
+}
+
+nav.navbar-primary {
+    padding: 36px;
+    font-size: 24px;
+}
+
+div.navbar-brand {
+    font-size: 28px;
+    padding: 18px;
 }
